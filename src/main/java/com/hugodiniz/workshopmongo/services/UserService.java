@@ -1,6 +1,7 @@
 package com.hugodiniz.workshopmongo.services;
 
 import com.hugodiniz.workshopmongo.domain.User;
+import com.hugodiniz.workshopmongo.dto.RequestUserDTO;
 import com.hugodiniz.workshopmongo.repositories.UserRepository;
 import com.hugodiniz.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,11 @@ public class UserService {
     public void deleteById(String id) {
         findById(id);
         repository.deleteById(id);
+    }
+
+    public User update(User currentUser, RequestUserDTO data) {
+        currentUser.setName(data.name());
+        currentUser.setEmail(data.email());
+        return repository.save(currentUser);
     }
 }
