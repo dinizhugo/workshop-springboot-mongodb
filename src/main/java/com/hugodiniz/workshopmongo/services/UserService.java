@@ -21,4 +21,8 @@ public class UserService {
     public User findById(String id) {
         return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado."));
     }
+
+    public User insert(User obj) {
+        return repository.insert(obj);
+    }
 }
