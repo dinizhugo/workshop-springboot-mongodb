@@ -1,5 +1,6 @@
 package com.hugodiniz.workshopmongo.recources;
 
+import com.hugodiniz.workshopmongo.domain.Post;
 import com.hugodiniz.workshopmongo.domain.User;
 import com.hugodiniz.workshopmongo.dto.RequestUserDTO;
 import com.hugodiniz.workshopmongo.dto.UserDTO;
@@ -31,6 +32,13 @@ public class UserResource {
         User obj = service.findById(id);
 
         return ResponseEntity.ok().body(new UserDTO(obj.getId(), obj.getName(), obj.getEmail()));
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPostsByUserId(@PathVariable String id) {
+        User user = service.findById(id);
+
+        return ResponseEntity.ok().body(user.getPosts());
     }
 
     @PostMapping
