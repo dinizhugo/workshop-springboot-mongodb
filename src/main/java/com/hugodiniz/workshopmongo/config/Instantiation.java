@@ -3,6 +3,7 @@ package com.hugodiniz.workshopmongo.config;
 import com.hugodiniz.workshopmongo.domain.Post;
 import com.hugodiniz.workshopmongo.domain.User;
 import com.hugodiniz.workshopmongo.dto.AuthorDTO;
+import com.hugodiniz.workshopmongo.dto.CommentDTO;
 import com.hugodiniz.workshopmongo.repositories.PostRepository;
 import com.hugodiniz.workshopmongo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,13 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null, simpleDateFormat.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo, Abraços", new AuthorDTO(maria.getId(), maria.getName()));
         Post post2 = new Post(null, simpleDateFormat.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje", new AuthorDTO(maria.getId(), maria.getName()));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", simpleDateFormat.parse("21/03/2018"), new AuthorDTO(alex.getId(), alex.getName()));
+        CommentDTO c2 = new CommentDTO("Aproveite!", simpleDateFormat.parse("22/03/2018"), new AuthorDTO(bob.getId(), bob.getName()));
+        CommentDTO c3 = new CommentDTO("Tenha um otimo dia!", simpleDateFormat.parse("23/03/2018"), new AuthorDTO(alex.getId(), alex.getName()));
+
+        post1.getComments().addAll(Arrays.asList(c1,c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
